@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS reset */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td,img{padding:0;margin:0;}
+/* body基本字体字号 */
+body{font-size:14px;font-family:'Microsoft YaHei','STHeiti','Times New Roman', '\5FAE\8F6F\96C5\9ED1';}
+/* 合并边框以及边框间距清除 */
+table{border-collapse:collapse; border-spacing:0;}
+/* 清除图片和表单分组边框 */
+fieldset, img{border:0;}
+/* 定义基础字体样式和加粗规格 */
+address, caption, cite, code, dfn, em, strong, th, i, var{font-weight:normal;font-style:normal;}
+/* 清除列表项目符号 */
+ol, ul{list-style:none;}
+/* 表格标题和表头文字左对齐 */
+caption,th{text-align:left;}
+/* 输入框文字垂直居中 */
+input, label{vertical-align:middle;}
+/* 清除输入框边框 */
+input{border:0;}
+/* 清除标题标签样式 */
+h1, h2, h3, h4, h5, h6,b{font-weight:normal;font-size:100%;}
+/* <q>标签之间的文字两头加上引号(") ,表示引用*/
+q:before,q:after{content:'';}
+/* 标记缩写标签清除边框 */
+abbr,acronym{border:0;}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Vue增删改查操作</title>
+</head>
+<body>
+  <div class="menu" id="app">
+    <h1>用户列表</h1>
+    <div class="search">
+      <input type="text" placeholder="输入筛选条件" @input="searchData" list="sl">
+      <datalist id="sl">
+        <option v-for="item in searchlist" :value="item">{{item}}</option>
+      </datalist>
+      <button @click="add">新增</button>
+    </div>
+    <div class="list">
+      <table>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>电话</th>
+          <th>地址</th>
+          <th>爱好</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="item in showData">
+          <td>{{item.name}}</td>
+          <td>{{item.gender}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.address}}</td>
+          <td>
+            <span v-for="item in item.hobby">{{item}}</span>
+            <span>{{item.hobby.other}}</span>
+          </td>
+          <td class="handle">
+            <button @click="reviseUser(item)">修改</button>
+            <button @click="del(item)">删除</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--<div class="popup" v-if="popupState">-->
+      <!--<div class="content">-->
+        <!--<h2>修改\新增<span @click="popupState=false" class="close">x</span></h2>-->
+        <!--<ul class="int">-->
+          <!--<li>-->
+            <!--<label>姓名</label>-->
+            <!--<input type="text" v-model="cacheData.name"></li>-->
+          <!--<li>-->
+            <!--<label for="">性别</label>-->
+            <!--<input type="radio" name="gender" id="g1" value="男" v-model="cacheData.gender"><label for="g1">男</label>-->
+            <!--<input type="radio" name="gender" id="g2" value="女" v-model="cacheData.gender"><label for="g2">女</label>-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<label>电话</label>-->
+            <!--<input type="text" v-model="cacheData.phone">-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<label>地址</label>-->
+            <!--<select name="" id="" v-model="cacheData.address">-->
+              <!--<option disabled value="">请选择</option>-->
+              <!--<option value="南京市">南京市</option>-->
+              <!--<option value="北京市">北京市</option>-->
+              <!--<option value="东京市">东京市</option>-->
+              <!--<option value="汴京市">汴京市</option>-->
+            <!--</select>-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<label for="">爱好</label>-->
+            <!--<input type="checkbox" id="h1" value="音乐" v-model="cacheData.hobby"><label for="h1">音乐</label>-->
+            <!--<input type="checkbox" id="h2" value="读书" v-model="cacheData.hobby"><label for="h2">读书</label>-->
+            <!--<input type="checkbox" id="h3" value="运动" v-model="cacheData.hobby"><label for="h3">运动</label>-->
+            <!--<input type="checkbox" id="h4" value="书法" v-model="cacheData.hobby"><label for="h4">书法</label>-->
+            <!--<input type="checkbox" id="h5" value="赛车" v-model="cacheData.hobby"><label for="h5">赛车</label>-->
+            <!--<input  class="hobbytext" type="text" v-model="cacheData.hobby.other">其他-->
+          <!--</li>-->
+        <!--</ul>-->
+        <!--<div class="btn">-->
+          <!--<button @click="updata">确定</button>-->
+          <!--<button @click="popupState=false">取消</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <popup :cdata="cacheData" :ctype="setType" ref="opentype" @pushdata="updata"></popup>
+  </div>
+</body>
+<script type="text/template" id="popup">
+  <div class="popup" v-if="popupState">
+    <div class="content">
+      <h2><b v-if="ctype==-1">新增</b><b v-if="ctype!=-1">修改</b><span @click="popupState=!popupState" class="close">x</span></h2>
+      <ul class="int">
+        <li>
+          <label>姓名</label>
+          <input type="text" v-model="cacheData.name"></li>
+        <li>
+          <label for="">性别</label>
+          <input type="radio" name="gender" id="g1" value="男" v-model="cacheData.gender"><label for="g1">男</label>
+          <input type="radio" name="gender" id="g2" value="女" v-model="cacheData.gender"><label for="g2">女</label>
+        </li>
+        <li>
+          <label>电话</label>
+          <input type="text" v-model="cacheData.phone">
+        </li>
+        <li>
+          <label>地址</label>
+          <select name="" id="" v-model="cacheData.address">
+            <option disabled value="">请选择</option>
+            <option value="南京市">南京市</option>
+            <option value="北京市">北京市</option>
+            <option value="东京市">东京市</option>
+            <option value="汴京市">汴京市</option>
+          </select>
+        </li>
+        <li>
+          <label for="">爱好</label>
+          <input type="checkbox" id="h1" value="音乐" v-model="cacheData.hobby"><label for="h1">音乐</label>
+          <input type="checkbox" id="h2" value="读书" v-model="cacheData.hobby"><label for="h2">读书</label>
+          <input type="checkbox" id="h3" value="运动" v-model="cacheData.hobby"><label for="h3">运动</label>
+          <input type="checkbox" id="h4" value="书法" v-model="cacheData.hobby"><label for="h4">书法</label>
+          <input type="checkbox" id="h5" value="赛车" v-model="cacheData.hobby"><label for="h5">赛车</label>
+          <input  class="hobbytext" type="text" v-model="cacheData.hobby.other">其他
+        </li>
+      </ul>
+      <div class="btn">
+        <button @click="pushData">确定</button>
+        <button @click="popupState=!popupState">取消</button>
+      </div>
+    </div>
+  </div>
+</script>
+<script src="vue.js"></script>
+<script src="vue-resource.min.js"></script>
+<script src="mian.js"></script>
+</html>

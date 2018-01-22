@@ -1,0 +1,11 @@
+{
+  "result":{
+    "users":[
+      {"name":"张三","gender":"男","phone":"8547895","address":"南京市","hobby":["游泳","读书","音乐"]},
+      {"name":"李四","gender":"男","phone":"6878592","address":"东京市","hobby":["游泳","运动","音乐"]},
+      {"name":"王花花","gender":"女","phone":"5455789","address":"北京市","hobby":["游泳","绘画","音乐"]}
+    ]
+  },
+  "message":"success",
+  "code":"1"
+}

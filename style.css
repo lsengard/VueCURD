@@ -1,0 +1,410 @@
+@charset "utf-8";
+/* CSS reset */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+img {
+  padding: 0;
+  margin: 0;
+}
+/* body基本字体字号 */
+body {
+  font-size: 14px;
+  font-family: 'Microsoft YaHei', 'STHeiti', 'Times New Roman', '\5FAE\8F6F\96C5\9ED1';
+}
+/* 合并边框以及边框间距清除 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* 清除图片和表单分组边框 */
+fieldset,
+img {
+  border: 0;
+}
+/* 定义基础字体样式和加粗规格 */
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+i,
+var {
+  font-weight: normal;
+  font-style: normal;
+}
+/* 清除列表项目符号 */
+ol,
+ul {
+  list-style: none;
+}
+/* 表格标题和表头文字左对齐 */
+caption,
+th {
+  text-align: left;
+}
+/* 输入框文字垂直居中 */
+input,
+label {
+  vertical-align: middle;
+}
+/* 清除输入框边框 */
+input {
+  border: 0;
+}
+/* 清除标题标签样式 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b {
+  font-weight: normal;
+  font-size: 100%;
+}
+/* <q>标签之间的文字两头加上引号(") ,表示引用*/
+q:before,
+q:after {
+  content: '';
+}
+/* 标记缩写标签清除边框 */
+abbr,
+acronym {
+  border: 0;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+input[type="text"],
+input[type="password"] {
+  border-radius: 0!important;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #d82828;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(216, 40, 40, 0);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(216, 40, 40, 0);
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.newroom {
+  zoom: 1;
+}
+.newroom:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.mlr-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.bul-progressbar {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 7px;
+  border-radius: 3.5px;
+  background-color: #ccc;
+}
+.bul-progressbar span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 7px;
+  background-color: #2baa3f;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.max-container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /*IE6最小高度min-height*/
+  position: relative;
+  padding-bottom: 400px;
+}
+.inta {
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #2baa3f;
+  margin-right: 10px;
+}
+.menu {
+  width: 800px;
+  margin: 30px auto;
+  padding: 10px 20px;
+  background: rgba(226, 223, 219, 0.47);
+}
+.menu h1 {
+  font-size: 28px;
+  text-align: center;
+}
+.menu .search {
+  zoom: 1;
+}
+.menu .search:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.menu .search input {
+  float: left;
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #2baa3f;
+  margin-right: 10px;
+  width: 200px;
+}
+.menu .search button {
+  float: right;
+  position: relative;
+  display: block;
+  padding: 0;
+  width: 100px;
+  height: 26px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 26px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #1bbc9d;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 0 #13846e;
+  -ms-box-shadow: 0 4px 0 #13846e;
+  -moz-box-shadow: 0 4px 0 #13846e;
+  -o-box-shadow: 0 4px 0 #13846e;
+  box-shadow: 0 4px 0 #13846e;
+  border: 0;
+  top: -3px;
+}
+.menu .search button:active {
+  top: 4px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.menu .list table {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #3f93dd;
+}
+.menu .list table td,
+.menu .list table th {
+  padding: 10px;
+  border: 1px solid #3f93dd;
+}
+.menu .list table td span,
+.menu .list table th span {
+  margin-right: 15px;
+}
+.menu .list .handle > button {
+  position: relative;
+  display: block;
+  padding: 0;
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3f93dd;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 0 #2c679b;
+  -ms-box-shadow: 0 4px 0 #2c679b;
+  -moz-box-shadow: 0 4px 0 #2c679b;
+  -o-box-shadow: 0 4px 0 #2c679b;
+  box-shadow: 0 4px 0 #2c679b;
+  float: left;
+  margin-right: 15px;
+  border: 0;
+  font-size: 12px;
+}
+.menu .list .handle > button:active {
+  top: 4px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.menu .list .handle > button + button {
+  position: relative;
+  display: block;
+  padding: 0;
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #d82828;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 0 #971c1c;
+  -ms-box-shadow: 0 4px 0 #971c1c;
+  -moz-box-shadow: 0 4px 0 #971c1c;
+  -o-box-shadow: 0 4px 0 #971c1c;
+  box-shadow: 0 4px 0 #971c1c;
+  font-size: 12px;
+}
+.menu .list .handle > button + button:active {
+  top: 4px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.menu .popup {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.menu .popup .content {
+  position: absolute;
+  left: 50%;
+  width: 500px;
+  top: 50%;
+  padding: 10px 20px;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+.menu .popup .content h2 {
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+.menu .popup .content h2 span.close {
+  float: right;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+.menu .popup .content h2 span.close:hover {
+  transform: rotate(90deg);
+}
+.menu .popup .content .int input[type="text"] {
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #2baa3f;
+  margin-right: 10px;
+}
+.menu .popup .content .int input[type="text"].hobbytext {
+  width: 50px;
+}
+.menu .popup .content .int input[type="radio"] {
+  width: 15px;
+  height: 15px;
+}
+.menu .popup .content .int input[type="radio"] + label {
+  margin-right: 15px;
+  padding-left: 5px;
+}
+.menu .popup .content .int input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+}
+.menu .popup .content .int input[type="checkbox"] + label {
+  margin-right: 15px;
+  padding-left: 3px;
+}
+.menu .popup .content .int li {
+  padding: 8px 0;
+}
+.menu .popup .content .int li label:first-child {
+  margin-right: 15px;
+}
+.menu .popup .content .int select {
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid #2baa3f;
+  margin-right: 10px;
+}
+.menu .popup .content .btn {
+  width: 300px;
+  margin: 15px auto;
+  zoom: 1;
+}
+.menu .popup .content .btn:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.menu .popup .content .btn button {
+  float: left;
+  position: relative;
+  display: block;
+  padding: 0;
+  width: 80px;
+  height: 25px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #1bbc9d;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 0 #13846e;
+  -ms-box-shadow: 0 4px 0 #13846e;
+  -moz-box-shadow: 0 4px 0 #13846e;
+  -o-box-shadow: 0 4px 0 #13846e;
+  box-shadow: 0 4px 0 #13846e;
+  border: 0;
+}
+.menu .popup .content .btn button:active {
+  top: 4px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.menu .popup .content .btn button + button {
+  float: right;
+}
