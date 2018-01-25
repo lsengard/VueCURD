@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="element.css">
+    <link rel="stylesheet" href="el-style.css">
+    <title>From ElementUI</title>
+</head>
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="40px">
+                <h1>用户列表</h1>
+            </el-header>
+            <el-main>
+                <el-row :gutter="20">
+                    <div class="search">
+
+                    </div>
+                    <el-col :span="18">
+                        <input type="text" placeholder="输入筛选条件" @input="searchData" list="sl" class="el-input__inner">
+                        <datalist id="sl">
+                            <option v-for="item in searchlist" :value="item">{{item}}</option>
+                        </datalist>
+                        <!--<el-input placeholder="请输入内容" width="200"></el-input>-->
+                    </el-col>
+                    <el-col :span="6">
+                        <el-button type="primary" plain @click="add">新增</el-button>
+                    </el-col>
+                </el-row>
+                <el-table :data="showData">
+                    <el-table-column prop="name" label="姓名"></el-table-column>
+                    <el-table-column prop="gender" label="性别"></el-table-column>
+                    <el-table-column prop="phone" label="电话"></el-table-column>
+                    <el-table-column prop="address" label="地址"></el-table-column>
+                    <el-table-column prop="hobby" label="爱好" width="200">
+                        <template slot-scope="scope">
+                            <span v-for="item in scope.row.hobby" class="sho">{{item}}</span>
+                            <span>{{scope.row.other}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column  label="操作" width="150">
+                        <template slot-scope="scope">
+                            <el-button type="warning" plain size="small" @click="reviseUser(scope.row)">修改</el-button>
+                            <el-button type="danger" plain size="small" @click="del(scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+        <el-dialog title="操作" :visible.sync="popupState" width="40%">
+            <el-form  label-width="80px" class="form">
+                <el-form-item label="姓名">
+                    <el-input v-model="cacheData.name"></el-input>
+                </el-form-item>
+                <el-form-item label="性别">
+                    <el-radio-group v-model="cacheData.gender">
+                        <el-radio label="男"></el-radio>
+                        <el-radio label="女"></el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="电话">
+                    <el-input v-model="cacheData.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="地址">
+                    <el-select placeholder="请选择地址" v-model="cacheData.address">
+                        <el-option label="南京市" value="南京市"></el-option>
+                        <el-option label="东京市" value="东京市"></el-option>
+                        <el-option label="北京市" value="北京市"></el-option>
+                        <el-option label="汴京市" value="汴京市"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="爱好">
+                    <el-checkbox-group v-model="cacheData.hobby">
+                        <el-checkbox label="音乐" name="hobby"></el-checkbox>
+                        <el-checkbox label="读书" name="hobby"></el-checkbox>
+                        <el-checkbox label="运动" name="hobby"></el-checkbox>
+                        <el-checkbox label="赛车" name="hobby"></el-checkbox>
+                        <el-checkbox label="绘画" name="hobby"></el-checkbox>
+                    </el-checkbox-group>
+                    <el-input placeholder="其他" v-model="cacheData.other" class="other"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="updata(cacheData)">确定</el-button>
+                    <el-button @click="openchild()">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
+    </div>
+
+</body>
+</html>
+<script src="../vue.js"></script>
+<script src="../vue-resource.min.js"></script>
+<!-- 引入组件库 -->
+<script src="element.js"></script>
+<script src=main.js></script>

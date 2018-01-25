@@ -1,38 +1,18 @@
-Vue.component('popup',{
-    template:'#popup',
-    props:['cdata','ctype'],
-    data(){
-        return{
-            popupState:false //组件是否可见
-        }
-    },
-    computed:{
-        cacheData(){
-            return this.cdata;
-        }
-    },
-    methods:{
-        pushData(){
-            //组件自身通过$emit来触发一个pushdata的自定义事件，传递数据给父组件
-            this.$emit('pushdata',this.cacheData);
-            this.popupState = false;
-        }
-    }
-})
 var vm = new Vue({
-   el:'#app',
-   data:{
-       originData:[], //原始数据
-       showData:[], //页面显示数据
-       //popupState: false, //弹窗的显示状态 true为显示 false为不显示
-       setType: -1, //操作状态 -1:新增 其他值:修改
-       cacheData: {
-           hobby:{
-               other:''
-           }
-       },
-       searchlist:[] //查询数据时input下datalist的匹配数据
-   },
+    el:'#app',
+    data:{
+        originData:[], //原始数据
+        showData:[], //页面显示数据
+        popupState: false, //弹窗的显示状态 true为显示 false为不显示
+        setType: -1, //操作状态 -1:新增 其他值:修改
+        cacheData: {
+            hobby:[],
+            //     {
+            //     other:''
+            // }
+        },
+        searchlist:[] //查询数据时input下datalist的匹配数据
+    },
     mounted:function () { //钩子函数
         //在vue实例创建完成之后执行
         this.$nextTick(function() {
@@ -40,22 +20,36 @@ var vm = new Vue({
         });
     },
     methods:{
-       //请求用户数据
+        //请求用户数据
         reqData(){
-            this.$http.get('data.json').then((req)=>{
+            this.$http.get('../data.json').then((req)=>{
                 this.originData = req.body.result.users;
-                //es6解构深层拷贝
+                //用JSON方法做深层拷贝
                 this.showData = this.deepcopy(this.originData)
                 //console.log(this.showData)
             })
         },
         //删除用户
         del(item){
-            //console.log(this.originData,this.)
-            let num = this.originData.indexOf(item);
-            let num2 = this.showData.indexOf(item)
-            this.originData.splice(num,1);
-            this.showData = this.deepcopy(this.originData);
+            this.$confirm('是否删除该条数据？','提示',{
+                confirmButtonText:"确定",
+                cancelButtonText:'取消',
+                type: 'warning'
+            }).then(()=>{
+                let num = this.showData.indexOf(item);
+                this.showData.splice(num,1);
+                this.$message({
+                    message: '删除成功!',
+                    type:'success'
+                })
+            }).catch(()=>{
+                this.$message({
+                    message:'取消删除!',
+                    type:'info'
+                })
+            })
+            //this.showData = this.deepcopy(this.originData);
+
         },
         //新增用户
         add() {
@@ -66,11 +60,11 @@ var vm = new Vue({
                 name:'',
                 gender:'',
                 phone:'',
-                hobby:[]
+                hobby:[],
+                other:''
             };
-            this.cacheData.hobby.other = '';
-        }
-        ,
+            //this.cacheData.hobby.other = '';
+        },
         //修改用户
         reviseUser(item){
             this.openchild();
@@ -82,10 +76,19 @@ var vm = new Vue({
             //setTyoe为-1时新增用户,否则修改数组中位置为setType的那组的用户数据
             if(this.setType==-1){
                 this.originData.push(event);
+                this.$message({
+                    message:'新增成功!',
+                    type:'success',
+                })
             }else {
                 this.originData.splice(this.setType,1,event);
+                this.$message({
+                    message:'修改成功!',
+                    type:'success',
+                })
             }
             this.showData = this.deepcopy(this.originData);
+            this.openchild();
         },
         //查询数据 input上绑定一个input事件 监听输入状态 接收一个事件参数
         searchData(e){
@@ -119,12 +122,13 @@ var vm = new Vue({
         //在页面上显示子组件(新增和修改弹窗)
         openchild(){
             //通过$refs可以直接访问子组件内部我们抛出opentype这个值
-            this.$refs.opentype.popupState = true;
+            //this.$refs.opentype.popupState = true;
+            this.popupState = !this.popupState;
         },
         //深层拷贝数据到渲染显示列表
         deepcopy:function (obj) {
             let nobj = [...obj]
-             return nobj;
+            return nobj;
         }
     }
 });
