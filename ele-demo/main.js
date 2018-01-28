@@ -37,15 +37,16 @@ var vm = new Vue({
                 type: 'warning'
             }).then(()=>{
                 let num = this.showData.indexOf(item);
-                this.showData.splice(num,1);
+                this.originData.splice(num,1);
+                this.showData = this.deepcopy(this.originData);
                 this.$message({
                     message: '删除成功!',
-                    type:'success'
+                    type:'success',
                 })
             }).catch(()=>{
                 this.$message({
                     message:'取消删除!',
-                    type:'info'
+                    type:'info',
                 })
             })
             //this.showData = this.deepcopy(this.originData);
@@ -126,9 +127,12 @@ var vm = new Vue({
             this.popupState = !this.popupState;
         },
         //深层拷贝数据到渲染显示列表
-        deepcopy:function (obj) {
-            let nobj = [...obj]
-            return nobj;
-        }
+        // deepcopy:function (obj) {
+        //     let nobj = [...obj]
+        //     return nobj;
+        // },
+        deepcopy(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        },
     }
 });

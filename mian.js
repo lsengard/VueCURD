@@ -44,7 +44,7 @@ var vm = new Vue({
         reqData(){
             this.$http.get('data.json').then((req)=>{
                 this.originData = req.body.result.users;
-                //es6解构深层拷贝
+                //JSON方法做深层拷贝
                 this.showData = this.deepcopy(this.originData)
                 //console.log(this.showData)
             })
@@ -52,8 +52,8 @@ var vm = new Vue({
         //删除用户
         del(item){
             //console.log(this.originData,this.)
-            let num = this.originData.indexOf(item);
-            let num2 = this.showData.indexOf(item)
+            //let num = this.originData.indexOf(item);
+            let num = this.showData.indexOf(item);
             this.originData.splice(num,1);
             this.showData = this.deepcopy(this.originData);
         },
@@ -122,9 +122,13 @@ var vm = new Vue({
             this.$refs.opentype.popupState = true;
         },
         //深层拷贝数据到渲染显示列表
-        deepcopy:function (obj) {
-            let nobj = [...obj]
-             return nobj;
-        }
+        // deepcopy:function (obj) {
+        //     let nobj = [...obj]
+        //      return nobj;
+        // },
+        deepcopy(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        },
+
     }
 });
